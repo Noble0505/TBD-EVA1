@@ -1,0 +1,167 @@
+MySQL Shell 8.0.43
+
+Copyright (c) 2016, 2025, Oracle and/or its affiliates.
+Oracle is a registered trademark of Oracle Corporation and/or its affiliates.
+Other names may be trademarks of their respective owners.
+
+Type '\help' or '\?' for help; '\quit' to exit.
+ MySQL  JS > \sql
+Switching to SQL mode... Commands end with ;
+ MySQL  SQL > \connect --mc root@localhost
+Creating a Classic session to 'root@localhost'
+Fetching global names for auto-completion... Press ^C to stop.
+Your MySQL connection id is 14
+Server version: 8.0.43 MySQL Community Server - GPL
+No default schema selected; type \use <schema> to set one.
+ MySQL  localhost:3306 ssl  SQL > show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| prueba_tbd         |
+| sakila             |
+| sys                |
+| tbd1               |
+| world              |
++--------------------+
+8 rows in set (0.0083 sec)
+ MySQL  localhost:3306 ssl  SQL > use tbd1;
+Default schema set to `tbd1`.
+Fetching global names, object names from `tbd1` for auto-completion... Press ^C to stop.
+ MySQL  localhost:3306 ssl  tbd1  SQL > show tables;
++----------------+
+| Tables_in_tbd1 |
++----------------+
+| customer       |
+| persona        |
+| student        |
++----------------+
+3 rows in set (0.0165 sec)
+ MySQL  localhost:3306 ssl  tbd1  SQL > insert into persona value(1, "RAUL","Ornelas");
+Query OK, 1 row affected (0.0419 sec)
+ MySQL  localhost:3306 ssl  tbd1  SQL > desc persona;
++-----------+-------------+------+-----+---------+-------+
+| Field     | Type        | Null | Key | Default | Extra |
++-----------+-------------+------+-----+---------+-------+
+| id        | int         | YES  |     | NULL    |       |
+| nombre    | varchar(50) | YES  |     | NULL    |       |
+| apellidos | varchar(50) | YES  |     | NULL    |       |
++-----------+-------------+------+-----+---------+-------+
+3 rows in set (0.0173 sec)
+ MySQL  localhost:3306 ssl  tbd1  SQL > select * from persona;
++----+--------+-----------+
+| id | nombre | apellidos |
++----+--------+-----------+
+|  1 | RAUL   | Ornelas   |
++----+--------+-----------+
+1 row in set (0.0007 sec)
+ MySQL  localhost:3306 ssl  tbd1  SQL > insert into persona (id) value(29;
+ERROR: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 1
+ MySQL  localhost:3306 ssl  tbd1  SQL > insert into persona (id) value(2);
+Query OK, 1 row affected (0.0197 sec)
+ MySQL  localhost:3306 ssl  tbd1  SQL > select * from persona;
++----+--------+-----------+
+| id | nombre | apellidos |
++----+--------+-----------+
+|  1 | RAUL   | Ornelas   |
+|  2 | NULL   | NULL      |
++----+--------+-----------+
+2 rows in set (0.0007 sec)
+ MySQL  localhost:3306 ssl  tbd1  SQL > insert into persona values(3, "Juan","Perez"),(4,"benito","camelo"),(5,"Sergio","Andrade");
+Query OK, 3 rows affected (0.0181 sec)
+
+Records: 3  Duplicates: 0  Warnings: 0
+ MySQL  localhost:3306 ssl  tbd1  SQL > select * from persona;
++----+--------+-----------+
+| id | nombre | apellidos |
++----+--------+-----------+
+|  1 | RAUL   | Ornelas   |
+|  2 | NULL   | NULL      |
+|  3 | Juan   | Perez     |
+|  4 | benito | camelo    |
+|  5 | Sergio | Andrade   |
++----+--------+-----------+
+5 rows in set (0.0006 sec)
+ MySQL  localhost:3306 ssl  tbd1  SQL > delete from persona where nombre is null;
+Query OK, 1 row affected (0.0191 sec)
+ MySQL  localhost:3306 ssl  tbd1  SQL > select * from persona;
++----+--------+-----------+
+| id | nombre | apellidos |
++----+--------+-----------+
+|  1 | RAUL   | Ornelas   |
+|  3 | Juan   | Perez     |
+|  4 | benito | camelo    |
+|  5 | Sergio | Andrade   |
++----+--------+-----------+
+4 rows in set (0.0007 sec)
+ MySQL  localhost:3306 ssl  tbd1  SQL > desc customer;
++----------+--------------+------+-----+---------+----------------+
+| Field    | Type         | Null | Key | Default | Extra          |
++----------+--------------+------+-----+---------+----------------+
+| custid   | int          | NO   | PRI | NULL    | auto_increment |
+| custname | varchar(50)  | NO   |     | NULL    |                |
+| address  | varchar(100) | NO   |     | NULL    |                |
+| phone    | varchar(15)  | YES  |     | NULL    |                |
++----------+--------------+------+-----+---------+----------------+
+4 rows in set (0.0020 sec)
+ MySQL  localhost:3306 ssl  tbd1  SQL > insert into customer(custname) value("Raul Ornelas);
+                                     ">
+                                     "> ^c
+                                     "> c
+                                     "> a
+                                     "> ^C;
+                                     "> ^C
+ MySQL  localhost:3306 ssl  tbd1  SQL > insert into customer(custname) value("Raul Ornelas);
+                                     "> insert into customer(custname) value("Raul Ornelas");
+                                     "> ^C
+ MySQL  localhost:3306 ssl  tbd1  SQL > insert into customer(custname) value("Raul Ornelas");
+ERROR: 1364 (HY000): Field 'address' doesn't have a default value
+ MySQL  localhost:3306 ssl  tbd1  SQL > select * from customer;
+Empty set (0.0006 sec)
+ MySQL  localhost:3306 ssl  tbd1  SQL > insert into customer(custname) value("Raul Ornelas");
+ERROR: 1364 (HY000): Field 'address' doesn't have a default value
+ MySQL  localhost:3306 ssl  tbd1  SQL > insert into customer values("Raul Ornelas", "Casa de pepe","42394932");
+ERROR: 1136 (21S01): Column count doesn't match value count at row 1
+ MySQL  localhost:3306 ssl  tbd1  SQL > insert into customer values(1,"Raul Ornelas", "Casa de pepe","42394932");
+Query OK, 1 row affected (0.0178 sec)
+ MySQL  localhost:3306 ssl  tbd1  SQL > select * from customer;
++--------+--------------+--------------+----------+
+| custid | custname     | address      | phone    |
++--------+--------------+--------------+----------+
+|      1 | Raul Ornelas | Casa de pepe | 42394932 |
++--------+--------------+--------------+----------+
+1 row in set (0.0007 sec)
+ MySQL  localhost:3306 ssl  tbd1  SQL > insert into customer values(2,"Pedro","djeknenk","1234321"),(3,"juan","wojfcw","4321234");
+Query OK, 2 rows affected (0.0176 sec)
+
+Records: 2  Duplicates: 0  Warnings: 0
+ MySQL  localhost:3306 ssl  tbd1  SQL > select * from customer;
++--------+--------------+--------------+----------+
+| custid | custname     | address      | phone    |
++--------+--------------+--------------+----------+
+|      1 | Raul Ornelas | Casa de pepe | 42394932 |
+|      2 | Pedro        | djeknenk     | 1234321  |
+|      3 | juan         | wojfcw       | 4321234  |
++--------+--------------+--------------+----------+
+3 rows in set (0.0007 sec)
+ MySQL  localhost:3306 ssl  tbd1  SQL > insert into customer values(2,"Pedro","djeknenk","1234321"),(3,"juan","wojfcw","4321234");
+ERROR: 1062 (23000): Duplicate entry '2' for key 'customer.PRIMARY'
+ MySQL  localhost:3306 ssl  tbd1  SQL > insert into customer values("Cano","Avenida Glorieta");
+ERROR: 1136 (21S01): Column count doesn't match value count at row 1
+ MySQL  localhost:3306 ssl  tbd1  SQL > select count(*) from customer;
++----------+
+| count(*) |
++----------+
+|        3 |
++----------+
+1 row in set (0.0224 sec)
+ MySQL  localhost:3306 ssl  tbd1  SQL > select count(*) from persona;
++----------+
+| count(*) |
++----------+
+|        4 |
++----------+
+1 row in set (0.0159 sec)
+ MySQL  localhost:3306 ssl  tbd1  SQL >
